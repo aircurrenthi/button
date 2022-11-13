@@ -1,60 +1,83 @@
 import 'package:flutter/material.dart';
-  // This widget is the root of your application.
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  static const String _title = 'Flutter Code Sample';
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+      title: _title,
+      home: Scaffold(
+        appBar: AppBar(title: const Text(_title)),
+        body: const MyStatelessWidget(),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
-  void main() {
-    runApp(MyApp());
 }
 
-  class MyApp extends StatefulWidget {
-    @override
-    _MyAppState createState() => _MyAppState();
-}
+class MyStatelessWidget extends StatelessWidget {
+  const MyStatelessWidget({super.key});
 
-  class _MyAppState extends State<MyApp> {
-    @override
-    Widget build(BuildContext context) {
-      return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(
-              title: Text('Flutter FlatButton - tutorialkart.com'),
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
             ),
-            body: Center(child: Column(children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(20),
-                child: TextButton(
-                  child: Text('Login'),
-                  onPressed: () {},
+            onPressed: null,
+            child: const Text('Disabled'),
+          ),
+          const SizedBox(height: 30),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            onPressed: () {},
+            child: const Text('Enabled'),
+          ),
+          const SizedBox(height: 30),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: Stack(
+              children: <Widget>[
+                Positioned.fill(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF0D47A1),
+                          Color(0xFF1976D2),
+                          Color(0xFF42A5F5),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.all(20),
-                child: ElevatedButton(
-                  child: Text('Login'),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.all(16.0),
+                    textStyle: const TextStyle(fontSize: 20),
+                  ),
                   onPressed: () {},
+                  child: const Text('Gradient'),
                 ),
-              ),
-            ]))),
-      );
-    }
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
+}
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
